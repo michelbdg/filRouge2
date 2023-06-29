@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -18,7 +18,7 @@
     {% block menu %}
         <nav class="navbar navbar-expand-lg bg-info bg-gradient text-white">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><i class="fa-solid fa-burger fa-bounce fa-2xl"></i></a>
+                <a class="navbar-brand" href="{{ path('app_delicious') }}"><i class="fa-solid fa-burger fa-bounce fa-2xl"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,7 +42,14 @@
                         </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Connexion</a>
+                            <button type="button" class="btn btn-outline-warning btn-sm rounded">
+                                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-success btn-sm rounded">
+                                <a class="nav-link" href="{{ path('app_inscription') }}">Inscription</a>
+                            </button>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -54,7 +61,7 @@
         </nav>
     {% endblock %}
     {% block body %}
-        
+        <h1 class="text-center">Bienvenu sur mon site</h1>
     {% endblock %}
     </body>
 </html>
