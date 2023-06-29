@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,11 +29,11 @@ class InscriptionType extends AbstractType
             ])
             ->add('firstname', TextType::class,[
                 'label' => 'Prénom',
-                'constraints' => new Length(2,2,5),
+                'constraints' => new Length(2,2,99),
             ])
             ->add('lastname', TextType::class,[
                 'label' => 'Nom',
-                'constraints' => new Length(2,2,5)
+                'constraints' => new Length(2,2,99)
             ])
             ->add('phone', TelType::class,[
                 'label' => 'Téléphone',
@@ -42,6 +43,9 @@ class InscriptionType extends AbstractType
             ])
             ->add('submit', SubmitType::class,[
                 'label' => 'Valider'
+            ])
+            ->add('reset', ResetType::class,[
+                'label' => 'Effacer'
             ])
         ;
     }

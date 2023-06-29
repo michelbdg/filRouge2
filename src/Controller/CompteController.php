@@ -11,6 +11,6 @@ class CompteController extends AbstractController
     #[Route('/compte', name: 'compte')]
     public function index(): Response
     {
-        return $this->render('compte/index.html.twig');
+        return $this->render('compte/compte.html.twig');
     }
 }
