@@ -3,10 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Adresse;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Report\Text;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 class AdresseCrudController extends AbstractCrudController
 {
@@ -15,6 +18,10 @@ class AdresseCrudController extends AbstractCrudController
         return Adresse::class;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+    }
     
     public function configureFields(string $pageName): iterable
     {
