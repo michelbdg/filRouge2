@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Adresse;
+use App\Entity\Category;
+use App\Entity\Product;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -50,12 +52,14 @@ class DashboardController extends AbstractDashboardController
     {
         //yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::section('delicious');
-        yield MenuItem::subMenu('les utilisateurs', 'fa_solid fa_users', user::class)
+        yield MenuItem::subMenu('les utilisateurs', 'fa-solid fa-users', user::class)
             ->setSubItems([
-                MenuItem::linkToCrud('Ajouter','fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
-                MenuItem::linkToCrud('Visualiser','fas fa-eye', User::class),
+                MenuItem::linkToCrud('Ajouter','fa-solid fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+                MenuItem::linkToCrud('Visualiser','fa fa-eye', User::class),
 
             ]);
-        yield MenuItem::linkToCrud('les adresses', 'fa-solid fa_adress-book', Adresse::class);
+        yield MenuItem::linkToCrud('les adresses', 'fa-solid fa-address-card', Adresse::class);
+        yield MenuItem::linkToCrud('les catégories', 'fa-solid fa-bookmark', Category::class);
+        yield MenuItem::linkToCrud('les produits', 'fa-solid fa-cart-shopping', Product::class);
     }
 }
