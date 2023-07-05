@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Adresse;
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Transporteur;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -61,5 +62,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('les adresses', 'fa-solid fa-address-card', Adresse::class);
         yield MenuItem::linkToCrud('les catégories', 'fa-solid fa-bookmark', Category::class);
         yield MenuItem::linkToCrud('les produits', 'fa-solid fa-cart-shopping', Product::class);
+        yield MenuItem::linkToCrud('les transporteur', 'fa-solid fa-bus', Transporteur::class);
     }
 }

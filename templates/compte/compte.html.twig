@@ -3,16 +3,14 @@
 {% block title %}Mon Compte{% endblock %}
 
 {% block body %}
-    <section class="container-fluid bg-danger bg-gradient text-black" >
+    <section class="container-fluid bg-danger bg-gradient text-black">
         <div class="row" >
             <div class="col">
-                <table>
-                    <tr>
-                        <td><a class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ path('app_login') }}">Me connecter</a></td>
-                        <td><a class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ path('app_logout') }}">Me déconnecter</a></td>
-                        <td></td>
-                    </tr>
-                </table
+                <ul>
+                    <li><a class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ path('app_login') }}">Me connecter</a></li>
+                    <li><a class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ path('adresse') }}">Modifier mon adresse</a></li>
+                    <li></li>
+                </ul>
             </div>
         </div>
     </section>

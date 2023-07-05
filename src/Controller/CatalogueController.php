@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use index;
 
 class CatalogueController extends AbstractController
 {
@@ -20,6 +21,19 @@ class CatalogueController extends AbstractController
         $products = $this->emi->getRepository(Product::class)->findAll();
         return $this->render('catalogue/produits.html.twig', [
             'products' => $products,
+        ]);
+    }
+
+    #[Route('/product/{id}', name: 'product')]
+    public function index1($id): Response
+    {
+        
+        $product = $this->emi->getRepository(Product::class)->find($id);
+        if(!$product){
+            return $this->redirectToRoute('catalogue');
+        }
+        return $this->render('catalogue/detailsProduct.html.twig', [
+            'product' => $product,
         ]);
     }
 }
