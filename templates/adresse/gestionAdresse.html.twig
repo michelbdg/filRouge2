@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titre }}{% endblock %}
+
+{% block body %}
+    <a href="{{ path('adresse') }}" class="btn btn-info float-right mb-5">
+        <i class="fas fa-back"></i>
+    </a>
+    <h1>{{ titre }}</h1>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6"> 
+            {{ form(formAdresse) }}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+{% endblock %}

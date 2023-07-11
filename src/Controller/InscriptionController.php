@@ -18,7 +18,7 @@ class InscriptionController extends AbstractController
     {
         $this->emi = $emi;
     }
-    #[Route('/inscription', name: 'app_inscription')]
+    #[Route('/inscription', name: 'inscription')]
     public function index(Request $request,UserPasswordHasherInterface $uphi): Response
     {
         $user = new User();

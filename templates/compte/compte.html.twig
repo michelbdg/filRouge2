@@ -1,17 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte{% endblock %}
+{% block title %}Mon compte{% endblock %}
 
 {% block body %}
-    <section class="container-fluid bg-danger bg-gradient text-black">
-        <div class="row" >
-            <div class="col">
-                <ul>
-                    <li><a class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ path('app_login') }}">Me connecter</a></li>
-                    <li><a class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ path('adresse') }}">Modifier mon adresse</a></li>
-                    <li></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+{% if app.user %}
+    <h1>Bonjour M/Mme {{ app.user.firstname }}</h1>
+{% endif %}
+<ul>
+    <li><a href="#">Modifier profil</a></li>
+    <li><a href="{{ path('adresse') }}">Gérer mes adresses</a></li>
+    <li>Historique</li>
+</ul>
+
 {% endblock %}

@@ -28,10 +28,13 @@ class Adresse
     #[ORM\Column(length: 255)]
     private ?string $textAdresse = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $societe = null;
+
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $cp = null;
 
     #[ORM\Column(length: 255)]
@@ -40,9 +43,12 @@ class Adresse
     #[ORM\Column(length: 255)]
     private ?string $pays = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $societe = null;
 
+    public function __toString()
+    {
+        $ch = $this->libelle .":" . $this->prenom ." " . $this->nom . "<br>".
+        $this->textAdresse . " ". $this->cp ." ". $this->ville . " - " . $this->pays;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +114,18 @@ class Adresse
         return $this;
     }
 
+    public function getSociete(): ?string
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(?string $societe): static
+    {
+        $this->societe = $societe;
+
+        return $this;
+    }
+
     public function getPhone(): ?string
     {
         return $this->phone;
@@ -125,7 +143,7 @@ class Adresse
         return $this->cp;
     }
 
-    public function setCp(string $cp): static
+    public function setCp(?string $cp): static
     {
         $this->cp = $cp;
 
@@ -152,18 +170,6 @@ class Adresse
     public function setPays(string $pays): static
     {
         $this->pays = $pays;
-
-        return $this;
-    }
-
-    public function getSociete(): ?string
-    {
-        return $this->societe;
-    }
-
-    public function setSociete(?string $societe): static
-    {
-        $this->societe = $societe;
 
         return $this;
     }

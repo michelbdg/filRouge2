@@ -15,10 +15,9 @@
         {% block javascripts %}{% endblock %}
     </head>
     <body class="">
-    {% block menu %}
         <nav class="navbar navbar-expand-lg bg-dark-subtle bg-gradient shadow p-3 mb-5 bg-body-tertiary rounded bg-opacity-25">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_delicious') }}"><i class="fa-solid fa-burger fa-bounce fa-2xl" style="color:#df0c0c"></i></a>
+                <a class="navbar-brand" href="{{ path('catalogue') }}"><i class="fa-solid fa-burger fa-bounce fa-2xl" style="color:#df0c0c"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,7 +27,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#">Catalogue</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,22 +47,31 @@
                         </li>
                     </ul>
                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item mb-1">
-                            <button type="button" class="btn btn-outline-info btn-sm rounded">
-                                <a class="nav-link" href="{{ path('compte') }}">Mon compte</a>
-                            </button>
+                        {% if app.user %}
+                            <li>
+                                <div class="fs-6">
+                                    <small class="mx-5">Bonjour {{ app.user.firstname }}</small>
+                                    <a href="{{ path('compte') }}" class="text-white fs-6"><i class="fas fa-user-check"></i></a>
+                                    <span class="text-white"> | </span>
+                                    <a href="{{ path('app_logout') }}" class="text-white fs-6"><i class="fas fa-sign-out-alt"></i></a>
+                                </div>
+                                {% else %}
+                                    <a href="{{ path('app_login') }}" class="text-white fs-6"><i class="fas fa-user"></i></a>
+                                    <span class="text-white"> | </span>
+                                    <a href="{{ path('inscription') }}" class="text-white fs-6">Inscription</i></a>
+                        {% endif %}
                         </li>
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-danger btn-sm rounded">
-                                <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping" style="color: #f50000;"></i></a>
-                            </button>
+                        <li>
+                            <a href="{{ path('panier') }}" class="text-white fs-4 mx-3">
+                                <i class="fas fa-shopping-basket">
+                                    <span class="badgeNB position-absolute translate-middle badge rounded-pill bg-info">{{ monPanier.nbArticles() }}</span>
+                                </i>
+                            </a>
                         </li>
-                        
                    </ul>
                 </div>
             </div>
         </nav>
-    {% endblock %}
     {% block body %}{% endblock %}
         <footer>
             <section class="container-fluid bg-black bg-gradient text-center text-white">

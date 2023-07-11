@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choix des Transporteur{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {% set formhtml %}
+            {{form_start(f, { action : path('choisirTransporteur')}) }}
+                {{form_row(f.adresseLivraison,{
+                    'label_attr' : {'class' : 'fs-6 bg-dark bg-gradient text-white'},
+                    'attr' : {'class' : 'alert alert-info'}
+                }) }}
+                {{form_row(f.adresseFacturation,{
+                    'label_attr' : {'class' : 'fs-6 bg-dark bg-gradient text-white'},
+                    'attr' : {'class' : 'alert alert-info'}
+                }) }}
+                {{ form_widget(form) }}
+            {{form_end(f)}}
+            {% endset %}
+            {{ formhtml | replace({'[br]' : '</br>'}) | raw}}
+        </div>
+    </div>
+{% endblock %}

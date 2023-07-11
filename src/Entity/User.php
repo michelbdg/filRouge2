@@ -177,22 +177,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->adresses;
     }
 
-    public function addAdress(Adresse $adress): static
+    public function addAdresses(Adresse $adresses): static
     {
-        if (!$this->adresses->contains($adress)) {
-            $this->adresses->add($adress);
-            $adress->setUser($this);
+        if (!$this->adresses->contains($adresses)) {
+            $this->adresses->add($adresses);
+            $adresses->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeAdress(Adresse $adress): static
+    public function removeAdresses(Adresse $adresses): static
     {
-        if ($this->adresses->removeElement($adress)) {
+        if ($this->adresses->removeElement($adresses)) {
             // set the owning side to null (unless already changed)
-            if ($adress->getUser() === $this) {
-                $adress->setUser(null);
+            if ($adresses->getUser() === $this) {
+                $adresses->setUser(null);
             }
         }
 

@@ -23,6 +23,12 @@ class Transporteur
     #[ORM\Column(nullable: true)]
     private ?float $price = null;
 
+
+    public function __toString()
+    {
+        return $this->societe . "[br]" . $this->description . "[br]" .
+        number_format($this->price, 2, ',', '.') . " € ";
+    }
     public function getId(): ?int
     {
         return $this->id;

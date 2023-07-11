@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block body %}
+<a href="{{ path('ajouterAdresse') }}" class="card-link">
+    <h4 class="btn btn-info float-right mb-3">Ajouter une nouvelle adresse</h4>
+</a>
+<div class="row">
+    {% for adr in app.user.adresses %}
+        <div class="col-md-4 mt-5"> 
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{ adr.libelle }}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ adr.prenom ~ ' ' ~ adr.nom }}</h4>
+                    <p class="card-text">{{ adr.textAdresse }}<br>
+                    {{ adr.cp }} - {{ adr.ville }} - {{ adr.pays }}</p>
+                    <a href="{{ path('modifierAdresse', {'id' : adr.id}) }}" class="card-link">Modifier</a>
+                    <a href="{{ path('supprimerAdresse', {'id' : adr.id}) }}" class="card-link">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
