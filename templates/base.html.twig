@@ -13,6 +13,7 @@
         <!-- Partie JavaScript -->
         <script src="{{ asset('js/scrip.js') }}"></script>
         {% block javascripts %}{% endblock %}
+        {% block jsStripe %}{% endblock %}
     </head>
     <body class="">
         <nav class="navbar navbar-expand-lg bg-dark-subtle bg-gradient shadow p-3 mb-5 bg-body-tertiary rounded bg-opacity-25">
@@ -83,4 +84,7 @@
             </section>
         </footer
     </body>
+    {% block script %}
+        
+    {% endblock %}
 </html>

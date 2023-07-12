@@ -2,6 +2,10 @@
 
 {% block title %}Récapitulatif{% endblock %}
 
+{% block jsStripe %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
 {% block body %}
 <section class="container-fluid">
     <div class="row">
@@ -65,10 +69,37 @@
                     <strong>Sous total : {{ (t / 100)|number_format(2,',','.') }} €</strong><br>
                     <strong>Frais de livraison : {{ (transport.price)|number_format(2,',','.') }} €</strong><br>
                     <strong>Total : {{ ((t/ 100)+ transport.price)|number_format(2,',','.') }} €</strong><br>
-                    <a class="btn btn-primary btn-block mt-5" href="#"><i class="fas fa-check"></i>Payez | {{ ((t/ 100)+ transport.price)|number_format(2,',','.') }} €</a>
+                    <a class="btn btn-primary btn-block mt-5" id="btnPayer"><i class="fas fa-check"></i>Payez | {{ ((t/ 100)+ transport.price)|number_format(2,',','.') }} €</a>
             </div>
         </div>
     </div>
 </section>
 
+{% endblock %}
+{% block script %}
+    <script>
+        // Utiliser la clé publiquepour réceptionner l'évènement
+        var stripe = Stripe("pk_test_51KSV1UBy1MEUEfBYrSNwpl1oOOWHNDhknMouLwY205mdCxjzoUBscRI65IV3xmKibMhSMsTvT9bLM4Z68SwRcSLn00AVGOhuNV");
+        var checkBtn = document.getElementById('btnPayer');
+        checkBtn.addEventListener("click", function () {
+            fetch("/commande/create-session/{{ reference }}", 
+                {
+                    method: 'POST'
+                })
+                .then(function (response){
+                    return response.json();
+                })
+                .then(function (session){
+                    return stripe.redirectToCheckout({sessionId : session.id})
+                })
+                .then(function (result){
+                    if(result.error){
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error){
+                    console.error("Error:", error);
+                });
+        });
+    </script>
 {% endblock %}
