@@ -15,7 +15,7 @@
                     'label_attr' : {'class' : 'fs-6 bg-dark bg-gradient text-white'},
                     'attr' : {'class' : 'alert alert-info'}
                 }) }}
-                {{ form_widget(form) }}
+                {{ form_widget(f) }}
             {{form_end(f)}}
             {% endset %}
             {{ formhtml | replace({'[br]' : '</br>'}) | raw}}

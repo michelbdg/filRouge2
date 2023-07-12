@@ -13,10 +13,10 @@
                     'attr' : {'class' : 'alert alert-info'}
                 }) }}
                 
-                {{ form_widget(form) }}
+                {{ form_widget(f) }}
             {{form_end(f)}}
             {% endset %}
-            {{ formhtml|replace({'[br]' : '<br/>'}) |raw }}
+            {{ formhtml|replace({'[br]' : '</br>'}) |raw }}
         </div>
     </div>
 {% endblock %}

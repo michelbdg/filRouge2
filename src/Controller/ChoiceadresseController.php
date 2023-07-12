@@ -19,7 +19,7 @@ class ChoiceadresseController extends AbstractController
             'user' => $this->getUser()
         ]);
         return $this->render('choiceadresse/choisirAdresse.html.twig', [
-            'f' => '$form->CreateView()',
+            'f' => $form->createView(),
         ]);
     }
     #[Route('/compte/choisir/transporteur', name: 'choisirTransporteur')]
@@ -40,7 +40,7 @@ class ChoiceadresseController extends AbstractController
         }
         $form = $this->createForm(ChoisirTransporteurType::class);
 
-        return $this->render('choice/choisirTransporteur.html.twig',[
+        return $this->render('choiceAdresse/choisirTransporteur.html.twig',[
             'f' =>$form->createView(),
             'adrL' => $adrL,
             'adrF' => $adrF

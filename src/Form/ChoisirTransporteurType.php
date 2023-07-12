@@ -14,7 +14,7 @@ class ChoisirTransporteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('Transporteur', EntityType::class, [
+        ->add('transporteur', EntityType::class, [
             'label' => 'Liste des transporteurs disponible',
             'required' => true,
             'class' => Transporteur::class, 

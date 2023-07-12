@@ -1,20 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RecapController!{% endblock %}
+{% block title %}Récapitulatif{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<section class="container-fluid">
+    <div class="row">
+        <div class="col md-4">
+            <div>
+                <span class="fs-6">Adresse de livraisn choisie</span><br>
+                <hr>
+                    {{ adrL |replace({ '[br]' : '<br/>' }) |raw}}
+                <hr>
+            </div>
+            <div>
+                <span class="fs-6">Adresse de facturation choisie</span><br>
+                <hr>
+                    {{ adrF |replace({ '[br]' : '<br/>' }) |raw}}
+                <hr>
+            </div>
+            <div>
+                <span class="fs-6">Transporteur choisie</span><br>
+                <hr>
+                    {{ transport.societe}}<br>
+                    {{ transport.price | number_format(2, ',', '.')}} €<br>
+                <hr>
+            
+            </div>
+        </div>
+        <div class="col md-8">
+            <h2>Récapitulatif</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Prix total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {# t est une variable qui stocke le cumul des totaux #}
+                    {% set t = null %} 
+                    {% for prod in panier %}
+                        <tr>   
+                            <td>
+                                <div class="w-50 h-50">
+                                    <img class="img-fluid img-thumbnail rounded" alt="oups" src="assets/images/products/{{ prod.product.image }}">
+                                </div>
+                            </td>
+                            <td>{{ prod.product.name }}</td>
+                            <td>
+                                {{ prod.qty }}
+                                <td>{{ (prod.product.price / 100)|number_format(2,',','.') }} €</td>
+                            <td>
+                                {{ ((prod.product.price * prod.qty) / 100)|number_format(2,',','.') }} €
+                            </td>
+                        </tr>
+                    {% set t = t + (prod.product.price * prod.qty) %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-end">
+                    <strong>Sous total : {{ (t / 100)|number_format(2,',','.') }} €</strong><br>
+                    <strong>Frais de livraison : {{ (transport.price)|number_format(2,',','.') }} €</strong><br>
+                    <strong>Total : {{ ((t/ 100)+ transport.price)|number_format(2,',','.') }} €</strong><br>
+                    <a class="btn btn-primary btn-block mt-5" href="#"><i class="fas fa-check"></i>Payez | {{ ((t/ 100)+ transport.price)|number_format(2,',','.') }} €</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/INSY2S/filRouge/filRouge2/src/Controller/RecapController.php'|file_link(0) }}">src/Controller/RecapController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/INSY2S/filRouge/filRouge2/templates/recap/index.html.twig'|file_link(0) }}">templates/recap/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

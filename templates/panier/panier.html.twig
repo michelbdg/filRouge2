@@ -3,51 +3,53 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-<div class="text-end">
-    <a href="{{ path('viderPanier') }}" class="btn btn-warning"><i class="fas fa-dumpster"></i></a>
-</div>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Image</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Quantité</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Prix total</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {# t est une variable qui stocke le cumul des totaux #}
-        {% set t = null %} 
-        {% for prod in panier %}
-            <tr>   
-                <td>
-                    <div class="w-50 h-50">
-                        <img class="img-fluid img-thumbnail rounded" alt="oups" src="/images/products/{{ prod.product.image }}">
-                    </div>
-                </td>
-                <td>{{ prod.product.name }}</td>
-                <td>
-                    <a href="{{ path('reduirePanier', { 'id' : prod.product.id }) }}"><i class="fas fa-minus"></i></a>
-                        {{ prod.qty }}
-                    <a href="{{ path('ajouterPanier', { 'id' : prod.product.id }) }}"><i class="fas fa-plus"></i></a>
-                </td>
-                <td>{{ (prod.product.price / 100)|number_format(2,',','.') }} €</td>
-                <td>
-                    {{ ((prod.product.price * prod.qty) / 100)|number_format(2,',','.') }} €
-                </td>
-                <td>
-                    <a href="{{ path('product', { 'id' : prod.product.id }) }}"><i class="fas fa-eye"></i></a><br>
-                    <a href="{{ path('supprimerPanier', { 'id' : prod.product.id }) }}"><i class="fas fa-trash"></i></a>
-                </td>
+<section class="container-fluid">
+    <div class="text-end">
+        <a href="{{ path('viderPanier') }}" class="btn btn-warning"><i class="fas fa-dumpster"></i></a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Prix total</th>
+                <th scope="col">Actions</th>
             </tr>
-            {% set t = t + (prod.product.price * prod.qty) %}
-        {% endfor %}
-    </tbody>
-</table>
-<div class="text-end">
-    <span>Total du panier : {{ (t / 100)|number_format(2,',','.') }} €</span><br>
-    <a class="btn btn-success btn-block mt-5" href="{{ path('choisirAdresse') }}"><i class="fas fa-check"></i>Valider mon panier</a>
-</div>
+        </thead>
+        <tbody>
+            {# t est une variable qui stocke le cumul des totaux #}
+            {% set t = null %} 
+            {% for prod in panier %}
+                <tr>   
+                    <td>
+                        <div class="w-50 h-50">
+                            <img class="img-fluid img-thumbnail rounded" alt="oups" src="/images/products/{{ prod.product.image }}">
+                        </div>
+                    </td>
+                    <td>{{ prod.product.name }}</td>
+                    <td>
+                        <a href="{{ path('reduirePanier', { 'id' : prod.product.id }) }}"><i class="fas fa-minus"></i></a>
+                            {{ prod.qty }}
+                        <a href="{{ path('ajouterPanier', { 'id' : prod.product.id }) }}"><i class="fas fa-plus"></i></a>
+                    </td>
+                    <td>{{ (prod.product.price / 100)|number_format(2,',','.') }} €</td>
+                    <td>
+                        {{ ((prod.product.price * prod.qty) / 100)|number_format(2,',','.') }} €
+                    </td>
+                    <td>
+                        <a href="{{ path('product', { 'id' : prod.product.id }) }}"><i class="fas fa-eye"></i></a><br>
+                        <a href="{{ path('supprimerPanier', { 'id' : prod.product.id }) }}"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% set t = t + (prod.product.price * prod.qty) %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-end">
+        <span>Total du panier : {{ (t / 100)|number_format(2,',','.') }} €</span><br>
+        <a class="btn btn-success btn-block mt-5" href="{{ path('choisirAdresse') }}"><i class="fas fa-check"></i>Valider mon panier</a>
+    </div>
+<section>
 {% endblock %}

@@ -48,6 +48,7 @@ class Adresse
     {
         $ch = $this->libelle .":" . $this->prenom ." " . $this->nom . "<br>".
         $this->textAdresse . " ". $this->cp ." ". $this->ville . " - " . $this->pays;
+        return $ch;
     }
     public function getId(): ?int
     {
